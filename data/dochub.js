@@ -11,7 +11,7 @@ function getExample(propertyName) {
     if (h2.textContent == propertyName) {
       let parent = h2.parentNode;
       let examples = parent.querySelector("#section_4 pre");
-      self.port.emit("example", examples.innerHTML);
+      self.port.emit("example", examples.outerHTML);
     }
   }
 }

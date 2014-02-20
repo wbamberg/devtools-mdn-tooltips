@@ -6,8 +6,8 @@ self.on("message", function(message) {
   let heading = document.getElementById("title");
   heading.textContent = message.element;
 
-  let excerpt = document.getElementById("excerpt");
-  excerpt.innerHTML = message.excerpt;
+  let overview = document.getElementById("overview");
+  overview.innerHTML = message.excerpt;
 
   url = message.url;
   propertyName = message.element;
@@ -17,15 +17,38 @@ self.on("message", function(message) {
     highlights[i].classList.add("ruleview-propertyname","theme-fg-color5");
   }
 
-  let getExample = document.getElementById("example");
-  getExample.addEventListener("click", handleExampleClick, false);
+  handleOverviewClick();
 
-  let visitPage = document.getElementById("visit-page");
+  let overview = document.getElementById("overview-button");
+  overview.addEventListener("click", handleOverviewClick, false);
+
+  let example = document.getElementById("example-button");
+  example.addEventListener("click", handleExampleClick, false);
+
+  let visitPage = document.getElementById("visit-page-button");
   visitPage.addEventListener("click", handleVisitPageClick, false);
 });
 
+function gotExample(example) {
+ let exampleDiv = document.getElementById("example");
+ exampleDiv.innerHTML = example;
+}
+
+self.port.on("got-example", gotExample);
+
+function handleOverviewClick() {
+  let overview = document.getElementById("overview");
+  overview.style.display = "block";
+  let example = document.getElementById("example");
+  example.style.display = "none";
+}
+
 function handleExampleClick() {
-  self.port.emit("get-example", propertyName);
+  console.log("clicked");
+  let overview = document.getElementById("overview");
+  overview.style.display = "none";
+  let example = document.getElementById("example");
+  example.style.display = "block";
 }
 
 function handleVisitPageClick(e) {
