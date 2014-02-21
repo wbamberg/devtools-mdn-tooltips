@@ -9,6 +9,9 @@ self.on("message", function(message) {
   let overview = document.getElementById("overview");
   overview.innerHTML = message.excerpt;
 
+  let exampleDiv = document.getElementById("example");
+  exampleDiv.innerHTML = message.example;
+
   url = message.url;
   propertyName = message.element;
 
@@ -28,13 +31,6 @@ self.on("message", function(message) {
   let visitPage = document.getElementById("visit-page-button");
   visitPage.addEventListener("click", handleVisitPageClick, false);
 });
-
-function gotExample(example) {
- let exampleDiv = document.getElementById("example");
- exampleDiv.innerHTML = example;
-}
-
-self.port.on("got-example", gotExample);
 
 function handleOverviewClick() {
   let overview = document.getElementById("overview");
