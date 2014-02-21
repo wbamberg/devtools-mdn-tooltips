@@ -14,7 +14,7 @@ self.on("message", function(message) {
 
   let highlights = document.getElementsByTagName("em");
   for (let i = 0; i < highlights.length; i++) {
-    highlights[i].classList.add("ruleview-propertyname","theme-fg-color5");
+    highlights[i].classList.add("theme-fg-color5");
   }
 
   handleOverviewClick();
