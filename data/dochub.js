@@ -10,8 +10,13 @@ function getExample(propertyName) {
     let h2 = allTheH2[i];
     if (h2.textContent == propertyName) {
       let parent = h2.parentNode;
-      let examples = parent.querySelector("#section_4 pre");
-      self.port.emit("example", examples.outerHTML);
+      let example = parent.querySelector("#section_4 pre");
+      if (example) {
+        self.port.emit("example", example.outerHTML);
+      }
+      else {
+         self.port.emit("example", "No example available");
+      }
     }
   }
 }
