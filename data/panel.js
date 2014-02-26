@@ -27,5 +27,6 @@ self.on("message", function(message) {
 function handleVisitPageClick(e) {
   e.stopPropagation();
   e.preventDefault();
+  url += '?utm_campaign=search-api&utm_source=firefox&utm_medium=inspector';
   self.port.emit("open-link", url);
 }
