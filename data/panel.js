@@ -9,8 +9,8 @@ self.on("message", function(message) {
   let overview = document.getElementById("overview");
   overview.innerHTML = message.excerpt;
 
-  let exampleDiv = document.getElementById("example");
-  exampleDiv.innerHTML = message.example;
+  //let exampleDiv = document.getElementById("example");
+  //exampleDiv.innerHTML = message.example;
 
   url = message.url;
   propertyName = message.element;
