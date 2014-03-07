@@ -20,13 +20,22 @@ self.on("message", function(message) {
     highlights[i].classList.add("theme-fg-color5");
   }
 
+  let links = document.getElementsByTagName("a");
+  for (let i = 0; i < links.length; i++) {
+    links[i].classList.add("theme-link");
+    links[i].addEventListener("click", function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+      }, false);
+  }
+
   let visitPage = document.getElementById("visit-page-button");
-  visitPage.addEventListener("click", handleVisitPageClick, false);
+  visitPage.addEventListener("click", handleLinkClick, false);
 });
 
-function handleVisitPageClick(e) {
+function handleLinkClick(e) {
   e.stopPropagation();
   e.preventDefault();
-  url += '?utm_campaign=search-api&utm_source=firefox&utm_medium=inspector';
-  self.port.emit("open-link", url);
+  let target = propertyName + '?utm_campaign=search-api&utm_source=firefox&utm_medium=inspector';
+  self.port.emit("open-link", target);
 }
