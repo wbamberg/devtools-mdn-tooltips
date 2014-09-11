@@ -23,19 +23,17 @@ self.on("message", function(message) {
   let links = document.getElementsByTagName("a");
   for (let i = 0; i < links.length; i++) {
     links[i].classList.add("theme-link");
-    links[i].addEventListener("click", function(e) {
-      e.stopPropagation();
-      e.preventDefault();
-      }, false);
+    links[i].addEventListener("click", handleLinkClick, false);
   }
 
   let visitPage = document.getElementById("visit-page-button");
+  visitPage.href = message.url;
   visitPage.addEventListener("click", handleLinkClick, false);
 });
 
 function handleLinkClick(e) {
   e.stopPropagation();
   e.preventDefault();
-  let target = propertyName + '?utm_campaign=search-api&utm_source=firefox&utm_medium=inspector';
-  self.port.emit("open-link", target);
+  let link = e.target.href + '?utm_campaign=search-api&utm_source=firefox&utm_medium=inspector';
+  self.port.emit("open-link", link);
 }
