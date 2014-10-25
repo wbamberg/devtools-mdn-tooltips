@@ -7,10 +7,10 @@ self.on("message", function(message) {
   heading.textContent = message.element;
 
   let overview = document.getElementById("overview");
-  overview.innerHTML = message.excerpt;
+  overview.textContent = message.summary;
 
-  //let exampleDiv = document.getElementById("example");
-  //exampleDiv.innerHTML = message.example;
+  let examplePre = document.getElementById("example");
+  examplePre.textContent = message.example;
 
   url = message.url;
   propertyName = message.element;

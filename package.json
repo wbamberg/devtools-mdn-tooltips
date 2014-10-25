@@ -1,9 +1,9 @@
 {
   "name": "mdn-tooltips",
   "title": "mdn-tooltips",
-  "id": "jid1-YdgybbNTGCQNXw",
+  "id": "jid1-YdgybbNTGCQNXw@jetpack",
   "description": "a basic add-on",
-  "author": "",
+  "author": "wbamberg",
   "license": "MPL 2.0",
-  "version": "0.1"
+  "version": "0.2"
 }
