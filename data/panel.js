@@ -14,9 +14,6 @@ self.on("message", function(message) {
 
   let visitPage = document.getElementById("visit-page-button");
   visitPage.href = message.url;
-  console.log("url arg: " + url);
-
-  console.log("url: " + visitPage.href);
   visitPage.addEventListener("click", handleLinkClick, false);
 });
 
