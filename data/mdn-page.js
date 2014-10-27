@@ -1,3 +1,8 @@
+/*
+The following 3 functions are taken from MDN,
+and should enable me to get the next sibling
+that is not a comment or whitespace.
+*/
 function is_all_ws( nod )
 {
   // Use ECMA-262 Edition 3 String and RegExp features
