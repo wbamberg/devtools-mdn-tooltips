@@ -12,22 +12,11 @@ self.on("message", function(message) {
   let examplePre = document.getElementById("example");
   examplePre.textContent = message.example;
 
-  url = message.url;
-  propertyName = message.element;
-
-  let highlights = document.getElementsByTagName("em");
-  for (let i = 0; i < highlights.length; i++) {
-    highlights[i].classList.add("theme-fg-color5");
-  }
-
-  let links = document.getElementsByTagName("a");
-  for (let i = 0; i < links.length; i++) {
-    links[i].classList.add("theme-link");
-    links[i].addEventListener("click", handleLinkClick, false);
-  }
-
   let visitPage = document.getElementById("visit-page-button");
   visitPage.href = message.url;
+  console.log("url arg: " + url);
+
+  console.log("url: " + visitPage.href);
   visitPage.addEventListener("click", handleLinkClick, false);
 });
 

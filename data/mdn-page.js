@@ -18,45 +18,61 @@ function node_after( sib )
   return null;
 }
 
-function getExample() {
-  let summary = document.getElementById("Summary");
-  if (!summary || summary.tagName != "H2") {
-    sendError(summary);
-    return;
+/*
+Just throw if the node is undefined or not what we expect.
+*/
+function check(node, tagName) {
+  if (!node || node.tagName != tagName) {
+    throw new Error("Couldn't find docs node in document");
   }
-  let firstParagraph = node_after(summary);
-  if (!firstParagraph || firstParagraph.tagName != "P") {
-    sendError(firstParagraph);
-    return;
-  }
-  let summaryText = firstParagraph.textContent;
+}
 
+/*
+Return the textContent of the first non-whitespace
+element in the #Summary section of the document.
+
+It's expected to be a <P> element.
+*/
+function getSummary() {
+  let summary = document.getElementById("Summary");
+  check(summary, "H2");
+
+  let firstParagraph = node_after(summary);
+  check(firstParagraph, "P");
+
+  return firstParagraph.textContent;
+}
+
+/*
+Return the textContent of the second non-whitespace
+node in the #Syntax section of the document.
+
+Both the first and second nodes are expected to be <PRE> nodes.
+*/
+function getSyntax() {
   let syntax = document.getElementById("Syntax");
-  if (!syntax || syntax.tagName != "H2") {
-    sendError(syntax);
-    return;
-  }
+  check(syntax, "H2");
+
   let firstParagraph = node_after(syntax);
-  if (!firstParagraph || firstParagraph.tagName != "PRE") {
-    sendError(firstParagraph);
-    return;
-  }
+  check(firstParagraph, "PRE");
 
   let secondParagraph = node_after(firstParagraph);
-  if (!secondParagraph || secondParagraph.tagName != "PRE") {
-    sendError(secondParagraph);
-    return;
+  check(secondParagraph, "PRE");
+
+  return secondParagraph.textContent;
+}
+
+function getTheDocs() {
+  try {
+    let theDocs = {};
+    theDocs.summary = getSummary();
+    theDocs.syntax = getSyntax();
+
+    self.port.emit("got-the-docs", theDocs);
   }
-  let syntaxText = secondParagraph.textContent;
-
-  self.port.emit("got-the-docs", {
-    "summary": summaryText,
-    "syntax": syntaxText
-  });
+  catch(error) {
+    self.port.emit("got-error", error.message);
+  }
 }
 
-function sendError(element) {
-  self.port.emit("error", element + " : " + element.innerHTML + " : " + element.tagName);
-}
-
-getExample();
+getTheDocs();
